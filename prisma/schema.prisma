@@ -12,9 +12,40 @@ datasource db {
 
 //Model USER
 model User {
-  id String @id @default(uuid())
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  status    Status   @default(ACTIVE)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  Auth      Auth?
+
+  @@index([id, name, email])
+  @@map("users")
+}
+
+//Model AUTH
+model Auth {
+  id           String   @id @default(uuid())
+  accessToken  String   @map("access_token")
+  refreshToken String   @map("refresh_token")
+  userId       String   @unique @map("user_id")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@index([userId, accessToken, refreshToken])
+  @@index([accessToken])
+  @@map("auth")
 }
 
 model Test {
   id String @id @default(uuid())
+}
+
+// ENUM
+enum Status {
+  ACTIVE
+  INACTIVE
 }

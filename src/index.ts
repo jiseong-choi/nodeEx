@@ -3,6 +3,7 @@ import initApp from "app";
 import config from "config/index";
 import database from "database";
 import connectAdminJS from "admin";
+import { cors } from "@fuseble.inc/node";
 
 const globalHTML = `
 <h1>FUSEBLE Inc.</h1>
@@ -44,6 +45,8 @@ function goAdminJS(){
       status: 200,
     },
   });
+
+  initApp.app.use(cors());
 
   initApp.app.listen(config.PORT, () => {
     console.log(`🚀 Sever Listening on ${config.PORT}...`);
