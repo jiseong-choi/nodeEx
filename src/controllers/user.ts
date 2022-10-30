@@ -5,7 +5,7 @@ import database from 'database';
 export const getUserAPI: ControllerAPI = {
     tags: ['USER'],
     summary: '사용자 조회 API',
-    path: '/users',
+    path: '/user',
     method: 'GET'
 }
 
@@ -22,7 +22,7 @@ export const getUser: ExpressController = async (req, res, next) => {
 export const getUsersAPI: ControllerAPI = {
     tags: ['USER'],
     summary: '사용자 목록 조회 API',
-    path: '/user',
+    path: '/users',
     method: 'GET',
 };
 
