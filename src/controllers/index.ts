@@ -1,10 +1,12 @@
 import { userInfo } from 'os';
-import * as test from './test';
 import * as user from './user'
+import * as auth from './auth'
+import * as health from './health';
 
 const controllers = {
-  ...test,
+  ...health,
   ...user,
+  ...auth,
 };
 
 export default controllers;

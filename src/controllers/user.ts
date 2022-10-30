@@ -2,40 +2,6 @@ import { ControllerAPI, ExpressController } from '@fuseble.inc/node';
 import { Prisma, PrismaClient } from '@prisma/client';
 import database from 'database';
 
-export const createUserAPI: ControllerAPI = {
-    tags: ['USER'],
-    summary: '사용자 생성 API',
-    path: '/user',
-    method: 'POST',
-    body: [
-        { key: 'name', type: 'string', example: 'chris' },
-        { key: 'email', type: 'string', example: 'chris@chris-choi.dev' },
-        { key: 'password', type: 'string', example: '테스트비밀번호' },
-    ],
-};
-
-export const createUser: ExpressController = async (req, res, next) => {
-    const { name, email, password } = req.body;
-
-    const existUser = await database.user.findUnique({
-        where: { email },
-    })
-
-    if (existUser) {
-        res.status(409).json({ error: '이미 존재하는 이메일입니다.' });
-    } else {
-        const user = await database.user.create({
-            data: {
-                name,
-                email,
-                password
-            },
-        });
-
-        res.status(201).json(user);
-    }
-};
-
 export const getUserAPI: ControllerAPI = {
     tags: ['USER'],
     summary: '사용자 조회 API',

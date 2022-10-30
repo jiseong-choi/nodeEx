@@ -6,7 +6,7 @@ import controllers from 'controllers';
 import path from 'path';
 
 const openAPIOptions: OpenAPIOptions = {
-  title: 'FUSEBLE Inc.',
+  title: 'Chris Inc.',
   version: '0.0.1',
   urls: (config.SWAGGER_URLS || '')?.split(','),
 };

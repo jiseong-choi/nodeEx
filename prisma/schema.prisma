@@ -40,8 +40,11 @@ model Auth {
   @@map("auth")
 }
 
-model Test {
-  id String @id @default(uuid())
+//Model VERSION
+model Version {
+  id     String  @id
+  status Status  @default(ACTIVE)
+  isMain Boolean @default(false)
 }
 
 // ENUM
