@@ -14,7 +14,7 @@ export const signUpAPI: ControllerAPI = {
     ],
 };
 
-export const sigUpUser: ExpressController = async (req, res, next) => {
+export const signUpUser: ExpressController = async (req, res, next) => {
     const { name, email, password } = req.body;
 
     const existUser = await database.user.findUnique({
