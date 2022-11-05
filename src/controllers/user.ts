@@ -5,7 +5,7 @@ import database from 'database';
 export const getUserAPI: ControllerAPI = {
     tags: ['USER'],
     summary: '사용자 조회 API',
-    path: '/user',
+    path: '/user/:id',
     method: 'GET'
 }
 
