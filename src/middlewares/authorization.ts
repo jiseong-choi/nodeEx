@@ -1,5 +1,7 @@
+import { User } from "@prisma/client";
 import type { Request, Response, NextFunction } from "express";
+import { verify } from "jsonwebtoken";
 
-const Authorization = {};
+export const Authorization = {
 
-export default Authorization;
+};
