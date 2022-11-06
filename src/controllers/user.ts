@@ -1,6 +1,9 @@
-import { ControllerAPI, ExpressController } from '@fuseble.inc/node';
+import { ControllerAPI, ExpressController, Jsonwebtoken } from '@fuseble.inc/node';
 import { Prisma, PrismaClient } from '@prisma/client';
+import config from 'config';
 import database from 'database';
+import { Authorization } from 'middlewares';
+import jsonWebTokenMiddleware from 'middlewares/jsonwebtoken';
 
 export const getUserAPI: ControllerAPI = {
     tags: ['USER'],
@@ -24,6 +27,11 @@ export const getUsersAPI: ControllerAPI = {
     summary: '사용자 목록 조회 API',
     path: '/users',
     method: 'GET',
+    auth: 'jwt',
+    middlewares: [Authorization.USER],
+    header: [
+        { key: 'Authorization', type: 'string', example: 'Bearer <JWT>' }
+    ]
 };
 
 export const getUsers: ExpressController = async (req, res, next) => {

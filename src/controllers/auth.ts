@@ -1,6 +1,7 @@
-import { ControllerAPI, ExpressController, Jsonwebtoken } from "@fuseble.inc/node";
+import { ControllerAPI, ExpressController, jsonwebtoken, Jsonwebtoken } from "@fuseble.inc/node";
 import database from "database";
 import bcrypt from "bcryptjs";
+import config from "config";
 
 export const signUpAPI: ControllerAPI = {
     tags: ['AUTH'],
@@ -14,11 +15,7 @@ export const signUpAPI: ControllerAPI = {
     ],
 };
 
-<<<<<<< HEAD
 export const signUp: ExpressController = async (req, res, next) => {
-=======
-export const signUpUser: ExpressController = async (req, res, next) => {
->>>>>>> 29b33bed6abe4132525f55b7b70001e7926b0917
     const { name, email, password } = req.body;
 
     const existUser = await database.user.findUnique({
@@ -67,10 +64,9 @@ export const signIn: ExpressController = async (req, res, next) => {
         if (!isValidPassword) {
             res.status(401).json({ error: '비밀번호가 일치하지 않습니다.' });
         } else {
-            // const jwt = new Jsonwebtoken("test-jwt-key");
-            // const signedPayload = jwt.signJwt<{ id: string }>(value);
-            // const verifiedPayload = jwt.verifyJwt<{ id: string }>(value);
-            res.status(200).json(user);
+            const jsonwebtoken = new Jsonwebtoken(config.JWT_KEY);
+            const siginedPayLoad = jsonwebtoken.signJwt<{ id: string }>({ id: user.id });
+            res.status(200).json({ token: siginedPayLoad, user });
         }
     }
 }
