@@ -1,4 +1,5 @@
 import { ControllerAPI, ExpressController, Jsonwebtoken } from "@fuseble.inc/node";
+import { Authorization, jsonWebTokenMiddleware } from "middlewares";
 import database from "database";
 import bcrypt from "bcryptjs";
 import config from "config";
@@ -70,4 +71,19 @@ export const signIn: ExpressController = async (req, res, next) => {
             res.status(200).json({ ...user, token });
         }
     }
+}
+
+export const refreshAPI: ControllerAPI = {
+    tags: ['AUTH'],
+    summary: '토큰 리프레시 API',
+    path: '/auth/refresh',
+    method: 'GET',
+    middlewares: [jsonWebTokenMiddleware, Authorization.USER],
+};
+
+export const refresh: ExpressController = async (req, res, next) => {
+    const { user } = req;
+
+    const token = jsonwebtoken.signJwt<{ id: string }>({ id: user.id });
+    res.status(200).json({ token });
 }
