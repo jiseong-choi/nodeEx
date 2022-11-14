@@ -78,6 +78,7 @@ export const refreshAPI: ControllerAPI = {
     summary: '토큰 리프레시 API',
     path: '/auth/refresh',
     method: 'GET',
+    auth: 'jwt',
     middlewares: [jsonWebTokenMiddleware, Authorization.USER],
 };
 
