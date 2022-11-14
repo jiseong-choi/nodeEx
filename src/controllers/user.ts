@@ -28,7 +28,7 @@ export const getUsersAPI: ControllerAPI = {
     path: '/users',
     method: 'GET',
     auth: 'jwt',
-    middlewares: [Authorization.USER],
+    middlewares: [jsonWebTokenMiddleware, Authorization.USER],
     header: [
         { key: 'Authorization', type: 'string', example: 'Bearer <JWT>' }
     ]
