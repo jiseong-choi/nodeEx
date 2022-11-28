@@ -6,7 +6,7 @@ import connectAdminJS from "admin";
 import { cors } from "@fuseble.inc/node";
 
 const globalHTML = `
-<h1>FUSEBLE Inc.</h1>
+<h1>Chris D&M Inc.</h1>
 <div>
     <button onclick="goSwagger()">Swagger</button>
     <button style="margin-left: 12px;" onclick="goAdminJS()">AdminJS</button>
