@@ -45,7 +45,8 @@ model Portfolio {
   id    Int @id @default(autoincrement())
   name  String  
   description String @default("")
-  img   String @default("") 
+  img   String @default("")
+  isMain Boolean @default(false) 
 }
 
 //Model VERSION
